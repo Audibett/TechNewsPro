@@ -1,0 +1,99 @@
+/* Category Page Styles */
+.category-page {
+  padding: 40px 20px;
+}
+
+.category-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 60px 40px;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 50px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.category-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.category-header p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+/* Category Controls */
+.category-controls {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.sort-controls label {
+  font-weight: 600;
+  color: var(--light-text);
+}
+
+.dark-mode .sort-controls label {
+  color: var(--dark-text);
+}
+
+.sort-controls select {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--light-card);
+  color: var(--light-text);
+}
+
+.dark-mode .sort-controls select {
+  background-color: var(--dark-card);
+  color: var(--dark-text);
+  border-color: #334155;
+}
+
+.no-articles {
+  text-align: center;
+  padding: 100px 20px;
+  color: #9ca3af;
+}
+
+@media (max-width: 768px) {
+  .category-header {
+    padding: 40px 20px;
+  }
+
+  .category-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .category-icon {
+    font-size: 3rem;
+  }
+
+  .category-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
