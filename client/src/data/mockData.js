@@ -1,47 +1,69 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FiCalendar, FiUser, FiEye } from 'react-icons/fi';
-import '../styles/article-card.css';
+const categories = [
+  {
+    _id: '1',
+    name: 'AI',
+    slug: 'ai',
+    description: 'Artificial intelligence news, models, and innovation updates.',
+    icon: '🤖',
+    color: '#7c3aed'
+  },
+  {
+    _id: '2',
+    name: 'Web',
+    slug: 'web',
+    description: 'Web development, design systems, and frontend engineering.',
+    icon: '🌐',
+    color: '#2563eb'
+  },
+  {
+    _id: '3',
+    name: 'Mobile',
+    slug: 'mobile',
+    description: 'Mobile apps, device launches, and next-gen experiences.',
+    icon: '📱',
+    color: '#f97316'
+  },
+  {
+    _id: '4',
+    name: 'Security',
+    slug: 'security',
+    description: 'Cybersecurity alerts, privacy news, and protection trends.',
+    icon: '🛡️',
+    color: '#0f766e'
+  },
+  {
+    _id: '5',
+    name: 'Startups',
+    slug: 'startups',
+    description: 'Startup launches, funding rounds, and founder stories.',
+    icon: '🚀',
+    color: '#ec4899'
+  }
+];
 
-function ArticleCard({ article }) {
-  const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
+const authors = [
+  {
+    _id: 'u1',
+    name: 'Amina Okoro',
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&q=80',
+    bio: 'Technology journalist covering AI, startups, and emerging platforms.'
+  },
+  {
+    _id: 'u2',
+    name: 'Samuel Njoroge',
+    avatar: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=160&q=80',
+    bio: 'Product strategist writing on mobile growth and UX innovation.'
+  },
+  {
+    _id: 'u3',
+    name: 'Lina Mwende',
+    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=160&q=80',
+    bio: 'Cybersecurity analyst delivering clear insight on digital risk.'
+  }
+];
 
-  return (
-    <Link to={`/article/${article.slug}`} className="article-card">
-      <div className="article-image">
-        <img
-          src={article.thumbnail || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80'}
-          alt={article.title}
-          onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><rect width="100%" height="100%" fill="%23eef2ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%234f46e5" font-family="Arial, Helvetica, sans-serif" font-size="32">TechNews Pro</text></svg>'; }}
-        />
-        <span className="category-badge">{article.category?.name}</span>
-      </div>
-      <div className="article-content">
-        <h3 className="article-title">{article.title}</h3>
-        <p className="article-excerpt">{article.excerpt}</p>
-        <div className="article-meta">
-          <span className="meta-item" style={{display:'flex',alignItems:'center',gap:8}}>
-            <img src={article.author?.avatar || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&q=80'} alt={article.author?.name || 'A'} style={{width:20,height:20,borderRadius:999,objectFit:'cover'}} />
-            <span>{article.author?.name || 'Anonymous'}</span>
-          </span>
-          <span className="meta-item">
-            <FiCalendar size={16} />
-            {formatDate(article.createdAt)}
-          </span>
-          <span className="meta-item">
-            <FiEye size={16} />
-            {article.views} views
-          </span>
-        </div>
-      </div>
-    </Link>
-  );
-}
+const articles = [
+  // (keep your articles EXACTLY as they are)
+];
 
-export default ArticleCard;
+export { categories, authors, articles };

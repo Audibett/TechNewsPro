@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiCalendar, FiUser, FiEye } from 'react-icons/fi';
+import { FiCalendar, FiEye } from 'react-icons/fi';
 import '../styles/article-card.css';
+
 
 function ArticleCard({ article }) {
   const formatDate = (date) => {
