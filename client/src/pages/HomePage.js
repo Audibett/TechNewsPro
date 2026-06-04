@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ArticleCard from '../components/ArticleCard';
 import { newsService, predictionsService } from '../services/api';
+import { categories as mockCategories } from '../data/mockData';
 import '../styles/home.css';
 import { useLocation } from 'react-router-dom';
 
