@@ -17,7 +17,7 @@ function ProfilePage() {
         setUser(res.data);
       } catch (err) {
         console.error('Error fetching user:', err);
-        // Fallback to mock authors if backend unavailable
+        // Fallback to mock authors if backend unavailable......
         const found = mockAuthors.find(a => a._id === id || a.name === id);
         if (found) {
           setUser({...found, articles: []});
