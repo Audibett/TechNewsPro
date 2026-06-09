@@ -7,7 +7,6 @@ function Header({ darkMode, setDarkMode, user, setUser }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [loadingSuggest, setLoadingSuggest] = useState(false);
   const [useAI, setUseAI] = useState(false);
   const [useWeb, setUseWeb] = useState(false);
   const navigate = useNavigate();
