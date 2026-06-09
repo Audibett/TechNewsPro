@@ -9,39 +9,47 @@ function Header({ darkMode, setDarkMode, user, setUser }) {
   const [suggestions, setSuggestions] = useState([]);
   const [useAI, setUseAI] = useState(false);
   const [useWeb, setUseWeb] = useState(false);
+
   const navigate = useNavigate();
   const debounceRef = useRef(null);
 
   const handleSearch = (e) => {
     e.preventDefault();
+
     if (searchQuery.trim()) {
       const params = new URLSearchParams();
       params.set('search', searchQuery.trim());
+
       if (useAI) params.set('ai', '1');
       if (useWeb) params.set('web', '1');
+
       navigate(`/?${params.toString()}`);
       setSearchQuery('');
       setSuggestions([]);
     }
   };
 
-  // Suggestion debounce: local quick suggestions using mockData via client-side filter
+  // 🔍 Search suggestions (debounced)
   useEffect(() => {
     if (!searchQuery.trim()) {
       setSuggestions([]);
       return;
     }
-    setLoadingSuggest(true);
+
     clearTimeout(debounceRef.current);
+
     debounceRef.current = setTimeout(() => {
-      // local quick filter
-      import('../data/mockData').then(mod => {
+      import('../data/mockData').then((mod) => {
         const q = searchQuery.toLowerCase();
-        const res = mod.articles.filter(a => a.title.toLowerCase().includes(q)).slice(0,5);
+
+        const res = mod.articles
+          .filter((a) => a.title.toLowerCase().includes(q))
+          .slice(0, 5);
+
         setSuggestions(res);
-        setLoadingSuggest(false);
       });
     }, 260);
+
     return () => clearTimeout(debounceRef.current);
   }, [searchQuery]);
 
@@ -55,11 +63,14 @@ function Header({ darkMode, setDarkMode, user, setUser }) {
   return (
     <header className="header">
       <div className="header-container">
+
+        {/* Logo */}
         <Link to="/" className="logo">
           <span className="logo-icon">📰</span>
           <span className="logo-text">TechNews Pro</span>
         </Link>
 
+        {/* Navigation */}
         <nav className={`nav ${mobileMenuOpen ? 'active' : ''}`}>
           <Link to="/" className="nav-item">Home</Link>
           <Link to="/category/ai" className="nav-item">AI</Link>
@@ -69,7 +80,10 @@ function Header({ darkMode, setDarkMode, user, setUser }) {
           <Link to="/category/startups" className="nav-item">Startups</Link>
         </nav>
 
+        {/* Actions */}
         <div className="header-actions">
+
+          {/* Search */}
           <form onSubmit={handleSearch} className="search-form">
             <input
               type="text"
@@ -82,24 +96,51 @@ function Header({ darkMode, setDarkMode, user, setUser }) {
               <FiSearch size={20} />
             </button>
           </form>
-          <div style={{position:'relative'}}>
+
+          {/* Suggestions */}
+          <div style={{ position: 'relative' }}>
             {suggestions.length > 0 && (
               <div className="search-suggestions">
-                {suggestions.map(s => (
-                  <div key={s._id} className="suggestion-item" onClick={() => { setSearchQuery(''); navigate(`/?search=${s.title}`); setSuggestions([]); }}>
+                {suggestions.map((s) => (
+                  <div
+                    key={s._id}
+                    className="suggestion-item"
+                    onClick={() => {
+                      setSearchQuery('');
+                      navigate(`/?search=${s.title}`);
+                      setSuggestions([]);
+                    }}
+                  >
                     <strong>{s.title}</strong>
-                    <div style={{fontSize:12,color:'var(--subtext)'}}>{s.excerpt.slice(0,90)}...</div>
+                    <div style={{ fontSize: 12, color: 'var(--subtext)' }}>
+                      {s.excerpt?.slice(0, 90)}...
+                    </div>
                   </div>
                 ))}
               </div>
             )}
           </div>
 
-          <div style={{display:'flex',alignItems:'center',gap:8,marginLeft:8}}>
-            <label style={{fontSize:12,color:'var(--subtext)'}}><input type="checkbox" checked={useAI} onChange={(e)=>setUseAI(e.target.checked)} /> AI</label>
-            <label style={{fontSize:12,color:'var(--subtext)'}}><input type="checkbox" checked={useWeb} onChange={(e)=>setUseWeb(e.target.checked)} /> Web</label>
+          {/* Toggles */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 8 }}>
+            <label style={{ fontSize: 12, color: 'var(--subtext)' }}>
+              <input
+                type="checkbox"
+                checked={useAI}
+                onChange={(e) => setUseAI(e.target.checked)}
+              /> AI
+            </label>
+
+            <label style={{ fontSize: 12, color: 'var(--subtext)' }}>
+              <input
+                type="checkbox"
+                checked={useWeb}
+                onChange={(e) => setUseWeb(e.target.checked)}
+              /> Web
+            </label>
           </div>
 
+          {/* Theme toggle */}
           <button
             className="theme-btn"
             onClick={() => setDarkMode(!darkMode)}
@@ -108,12 +149,14 @@ function Header({ darkMode, setDarkMode, user, setUser }) {
             {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
           </button>
 
+          {/* User section */}
           {user ? (
             <div className="user-menu">
               <Link to={`/profile/${user.id}`} className="user-btn">
                 <FiUser size={20} />
                 <span>{user.name}</span>
               </Link>
+
               <button onClick={handleLogout} className="logout-btn">
                 <FiLogOut size={20} />
               </button>
@@ -122,12 +165,14 @@ function Header({ darkMode, setDarkMode, user, setUser }) {
             <Link to="/login" className="login-btn">Login</Link>
           )}
 
+          {/* Mobile menu */}
           <button
             className="mobile-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
+
         </div>
       </div>
     </header>
