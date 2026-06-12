@@ -12,6 +12,7 @@ function Header({ darkMode, setDarkMode, user, setUser }) {
 
   const navigate = useNavigate();
   const debounceRef = useRef(null);
+  //
 
   const handleSearch = (e) => {
     e.preventDefault();
